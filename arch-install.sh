@@ -102,7 +102,13 @@ fi
 # 4. Core Pacman-Pakete (immer)
 # ─────────────────────────────────────────────────────────────────────────────
 
-step "PipeWire (vor allen anderen Paketen, vermeidet pulseaudio-Konflikt)"
+step "Audio: pulseaudio entfernen, PipeWire installieren"
+
+# pulseaudio raus falls vom archinstall vorhanden
+if pacman -Qi pulseaudio &>/dev/null; then
+    info "Entferne pulseaudio..."
+    sudo pacman -Rns --noconfirm pulseaudio pulseaudio-alsa 2>/dev/null || true
+fi
 
 sudo pacman -S --noconfirm --needed pipewire pipewire-pulse pipewire-alsa wireplumber
 
