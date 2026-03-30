@@ -153,12 +153,12 @@ Nach der Installation:
 
 ## Nested Hyprland (Config testen)
 
-Hyprland läuft nested innerhalb einer laufenden Wayland-Session — kein Risiko für das Host-System:
+Hyprland läuft nested innerhalb einer laufenden Wayland-Session — kein Risiko für das Host-System. Das Testscript passt Pfade automatisch an, startet Waybar mit Nordgarden-CSS und räumt beim Beenden auf:
 
 ```bash
-# Mit dieser Config testen:
-Hyprland -c /pfad/zum/repo/config/hypr/hyprland.conf
-
-# Fokus: ins Fenster klicken
-# Beenden: SUPER+SHIFT+M
+bash test-nested.sh
 ```
+
+- Einmal ins Fenster klicken um Fokus zu übernehmen
+- Beenden: `SUPER+SHIFT+M`
+- Nicht aktiv (nested): `hypridle`, `hyprlock`, `swayosd`, Clipboard-Daemon

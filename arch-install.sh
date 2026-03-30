@@ -102,6 +102,10 @@ fi
 # 4. Core Pacman-Pakete (immer)
 # ─────────────────────────────────────────────────────────────────────────────
 
+step "PipeWire (vor allen anderen Paketen, vermeidet pulseaudio-Konflikt)"
+
+sudo pacman -S --noconfirm --needed pipewire pipewire-pulse pipewire-alsa wireplumber
+
 step "Core-Pakete (pacman)"
 
 PACMAN_PKGS=(
@@ -132,10 +136,6 @@ PACMAN_PKGS=(
     swww
 
     # Audio
-    pipewire
-    pipewire-pulse
-    pipewire-alsa
-    wireplumber
     pavucontrol
     playerctl
 
