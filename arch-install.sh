@@ -104,10 +104,12 @@ fi
 
 step "Audio: pulseaudio entfernen, PipeWire installieren"
 
-# pulseaudio raus falls vom archinstall vorhanden
-if pacman -Qi pulseaudio &>/dev/null; then
-    info "Entferne pulseaudio..."
-    sudo pacman -Rns --noconfirm pulseaudio pulseaudio-alsa 2>/dev/null || true
+# pulseaudio raus falls vom archinstall vorhanden (-Rdd ignoriert Abhängigkeiten)
+PULSE_PKGS=$(pacman -Qq 2>/dev/null | grep pulseaudio || true)
+if [[ -n "$PULSE_PKGS" ]]; then
+    info "Entferne pulseaudio-Pakete: $PULSE_PKGS"
+    # shellcheck disable=SC2086
+    sudo pacman -Rdd --noconfirm $PULSE_PKGS
 fi
 
 sudo pacman -S --noconfirm --needed pipewire pipewire-pulse pipewire-alsa wireplumber
