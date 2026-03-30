@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+# launch-or-focus — focus existing window by class, or launch the app
+# Usage: launch-or-focus <class_pattern> <launch_command...>
+# Replaces omarchy-launch-or-focus / omarchy-launch-or-focus-webapp
+#
+# Example:
+#   launch-or-focus signal signal-desktop
+#   launch-or-focus obsidian "obsidian --disable-gpu --enable-wayland-ime"
+
+class_pattern="$1"
+shift
+launch_cmd="$*"
+
+if hyprctl clients -j 2>/dev/null \
+    | jq -e --arg p "$class_pattern" \
+        'any(.[]; .class | ascii_downcase | test($p | ascii_downcase))' \
+    > /dev/null 2>&1
+then
+    hyprctl dispatch focuswindow "class:(?i)${class_pattern}"
+else
+    eval "$launch_cmd"
+fi

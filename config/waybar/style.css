@@ -1,0 +1,173 @@
+@define-color background #2e3440;
+@define-color foreground #d8dee9;
+@define-color frost      #88c0d0;
+@define-color teal       #8fbcbb;
+@define-color green      #a3be8c;
+@define-color aurora_red #bf616a;
+
+* {
+    font-family: 'JetBrainsMono Nerd Font';
+    font-size: 13px;
+    font-weight: 800;
+    transition: all 0.3s ease;
+}
+
+window#waybar { background: transparent; }
+
+/* GLOBAL MODULE BASE */
+#custom-launcher, #workspaces, #clock, #network, #cpu, #bluetooth, #mpris, #pulseaudio,
+#battery, #custom-updates, #custom-weather, #custom-power {
+    background: alpha(@background, 0.80);
+    border-radius: 14px;
+    padding: 0px 10px;
+    margin: 4px 3px;
+}
+
+/* LAUNCHER */
+#custom-launcher {
+    border: 2px solid @frost;
+    color: @frost;
+}
+
+/* WORKSPACES — Nord Frost/Teal diagonal border */
+#workspaces {
+    border-top:    2px solid #81a1c1;
+    border-left:   2px solid #81a1c1;
+    border-bottom: 2px solid @teal;
+    border-right:  2px solid @teal;
+    padding: 0 2px;
+}
+
+#workspaces button {
+    padding: 0px 10px;
+    color: rgba(216, 222, 233, 0.45);
+    margin: 4px 1px;
+    border-radius: 8px;
+}
+
+#workspaces button:hover {
+    color: @frost;
+    background: rgba(136, 192, 208, 0.10);
+    border-radius: 8px;
+}
+
+#workspaces button.active {
+    color: @frost;
+    background: rgba(136, 192, 208, 0.15);
+    border-radius: 10px;
+    text-shadow: 0 0 6px rgba(136, 192, 208, 0.4);
+}
+
+#workspaces button.urgent {
+    color: @aurora_red;
+}
+
+/* CLOCK — diagonal border, subtle glow */
+#clock {
+    color: @frost;
+    border-top:    2px solid #81a1c1;
+    border-left:   2px solid #81a1c1;
+    border-bottom: 2px solid @teal;
+    border-right:  2px solid @teal;
+    text-shadow: 0 0 6px rgba(136, 192, 208, 0.4);
+}
+
+/* UPDATES */
+#custom-updates {
+    color: #ebcb8b;
+    border: 2px solid #d08770;
+}
+
+/* CPU */
+#cpu {
+    color: #cbe3b3;
+    border: 2px solid @green;
+}
+
+/* BLUETOOTH */
+#bluetooth {
+    color: #81a1c1;
+    border: 2px solid #5e81ac;
+}
+
+/* NETWORK */
+#network {
+    color: @teal;
+    border: 2px solid @frost;
+}
+
+/* AUDIO */
+#pulseaudio {
+    color: #b48ead;
+    border: 2px solid #9b7fa8;
+}
+
+/* MPRIS */
+#mpris {
+    color: #d8a0b8;
+    border: 2px solid #b48ead;
+}
+
+/* BATTERY */
+#battery {
+    color: @teal;
+    border: 2px solid @frost;
+}
+
+#battery.charging,
+#battery.plugged {
+    color: #cbe3b3;
+    border: 2px solid @green;
+    text-shadow: 0 0 5px rgba(163, 190, 140, 0.35);
+}
+
+#battery.warning:not(.charging) {
+    color: #ebcb8b;
+    border: 2px solid #d08770;
+    text-shadow: 0 0 5px rgba(235, 203, 139, 0.35);
+}
+
+#battery.critical:not(.charging) {
+    background-color: rgba(191, 97, 106, 0.15);
+    color: @aurora_red;
+    border: 2px solid @aurora_red;
+    text-shadow: 0 0 6px rgba(191, 97, 106, 0.5);
+}
+
+/* POWER */
+#custom-power {
+    color: @aurora_red;
+    border: 2px solid #a3545b;
+}
+
+#custom-power:hover {
+    color: #d4747e;
+    border-color: @aurora_red;
+    text-shadow: 0 0 8px rgba(191, 97, 106, 0.5);
+}
+
+/* HOVER */
+#custom-updates:hover  { color: #f5d098; border-color: #ebcb8b; }
+#cpu:hover             { color: #cbe3b3; border-color: @green; }
+#bluetooth:hover       { color: #b2caed; border-color: #81a1c1; }
+#network:hover         { color: @frost;  border-color: @frost; }
+#pulseaudio:hover      { color: #d4b0ce; border-color: #b48ead; }
+#battery:hover         { color: @frost;  border-color: @frost; }
+#mpris:hover           { color: #e0b8cc; border-color: #d8a0b8; }
+
+/* TOOLTIPS */
+tooltip {
+    background: alpha(@background, 0.95);
+    border-top:    2px solid #81a1c1;
+    border-left:   2px solid #81a1c1;
+    border-bottom: 2px solid @teal;
+    border-right:  2px solid @teal;
+    border-radius: 10px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+}
+
+tooltip label {
+    color: @foreground;
+    font-size: 12px;
+    padding: 4px 2px;
+}

@@ -1,0 +1,115 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 40,
+    "spacing": 4,
+
+    "modules-left":   ["custom/launcher", "hyprland/workspaces"],
+    "modules-center": ["mpris", "clock"],
+    "modules-right":  ["bluetooth", "network", "pulseaudio", "battery", "cpu", "custom/updates", "custom/power"],
+
+    // ── Launcher ─────────────────────────────────────────────────────────
+    "custom/launcher": {
+        "format": "󱄅",
+        "on-click": "walker",
+        "tooltip": false
+    },
+
+    // ── Workspaces ────────────────────────────────────────────────────────
+    "hyprland/workspaces": {
+        "format": "{id}",
+        "on-click": "activate",
+        "sort-by-number": true,
+        "persistent-workspaces": {
+            "*": 5
+        }
+    },
+
+    // ── Now playing ───────────────────────────────────────────────────────
+    "mpris": {
+        "format": "{player_icon} {title} — {artist}",
+        "format-paused": "󰏤 {title} — {artist}",
+        "player-icons": {
+            "default": "󰎇",
+            "spotify": ""
+        },
+        "status-icons": {
+            "paused": "󰏤"
+        },
+        "max-length": 45,
+        "tooltip": false
+    },
+
+    // ── Clock ─────────────────────────────────────────────────────────────
+    "clock": {
+        "format": "󰃰 {:%H:%M}",
+        "format-alt": "󰃰 {:%Y-%m-%d  %H:%M}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+    },
+
+    // ── Bluetooth ─────────────────────────────────────────────────────────
+    "bluetooth": {
+        "format":           "󰂯",
+        "format-connected": "󰂱 {device_alias}",
+        "format-off":       "󰂲",
+        "on-click":         "blueman-manager",
+        "tooltip-format":   "{controller_alias}\n{num_connections} connected"
+    },
+
+    // ── Network ───────────────────────────────────────────────────────────
+    "network": {
+        "format-wifi":       "󰤨 {essid}",
+        "format-ethernet":   "󰈀 {ipaddr}",
+        "format-disconnected": "󰤭",
+        "format-linked":     "󰈀 (no IP)",
+        "tooltip-format-wifi": "{signalStrength}%  {ipaddr}"
+    },
+
+    // ── Audio ─────────────────────────────────────────────────────────────
+    "pulseaudio": {
+        "format":       "{icon} {volume}%",
+        "format-muted": "󰸈",
+        "format-icons": {
+            "headphone": "󰋋",
+            "default":   ["󰕿", "󰖀", "󰕾"]
+        },
+        "on-click": "pavucontrol",
+        "scroll-step": 5
+    },
+
+    // ── Battery ───────────────────────────────────────────────────────────
+    "battery": {
+        "states": {
+            "warning":  30,
+            "critical": 15
+        },
+        "format":         "{icon} {capacity}%",
+        "format-charging": "󰂄 {capacity}%",
+        "format-plugged":  "󰚄 {capacity}%",
+        "format-icons":   ["󰁺","󰁻","󰁼","󰁽","󰁾","󰁿","󰂀","󰂁","󰂂","󰁹"],
+        "tooltip-format":  "{timeTo}"
+    },
+
+    // ── CPU ───────────────────────────────────────────────────────────────
+    "cpu": {
+        "interval": 5,
+        "format":   "󰘚 {usage}%",
+        "tooltip":  false
+    },
+
+    // ── Pending updates ───────────────────────────────────────────────────
+    "custom/updates": {
+        "exec":     "checkupdates 2>/dev/null | wc -l",
+        "interval": 3600,
+        "format":   "󰏖 {}",
+        "on-click": "kitty -e yay",
+        "tooltip":  false
+    },
+
+    // ── Power ─────────────────────────────────────────────────────────────
+    "custom/power": {
+        "format":   "󰐥",
+        "on-click": "systemctl poweroff",
+        "tooltip":  false
+    }
+}

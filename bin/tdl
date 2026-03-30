@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+# tdl — Tries Development Layout
+
+SESSION="tries"
+DIR="$HOME/Work/tries"
+
+unset TMUX
+
+if tmux has-session -t "$SESSION" 2>/dev/null; then
+  tmux attach -t "$SESSION"
+  exit 0
+fi
+
+tmux new-session -d -s "$SESSION" -c "$DIR"
+tmux rename-window -t "$SESSION:1" "tries"
+
+# Schritt 1: Unten 20% Terminal – volle Breite
+tmux split-window -t "$SESSION:1.1" -v -p 20 -c "$DIR"
+
+# Schritt 2: Oben links 60% nvim, rechts 40% für opencode+claude
+tmux split-window -t "$SESSION:1.1" -h -p 40 -c "$DIR"
+
+# Schritt 3: Rechts 50/50 aufteilen – opencode oben, claude unten
+tmux split-window -t "$SESSION:1.3" -v -p 50 -c "$DIR"
+
+# Befehle senden
+tmux send-keys -t "$SESSION:1.1" "nvim ~/Documents/Zettelkasten" Enter
+tmux send-keys -t "$SESSION:1.3" "opencode" Enter
+tmux send-keys -t "$SESSION:1.4" "claude" Enter
+
+# Space+E für nvim file explorer (nach kurzer Ladezeit)
+sleep 1.5
+tmux send-keys -t "$SESSION:1.1" " e" ""
+
+# Fokus auf nvim
+tmux select-pane -t "$SESSION:1.1"
+
+tmux attach -t "$SESSION"

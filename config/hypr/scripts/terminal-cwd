@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# terminal-cwd — get working directory of the active Hyprland window
+# Replaces omarchy-cmd-terminal-cwd
+
+pid=$(hyprctl -j activewindow 2>/dev/null | jq -r '.pid // empty')
+
+if [[ -z "$pid" ]]; then
+    echo "$HOME"
+    exit 0
+fi
+
+cwd=$(readlink -e /proc/"$pid"/cwd 2>/dev/null)
+echo "${cwd:-$HOME}"
