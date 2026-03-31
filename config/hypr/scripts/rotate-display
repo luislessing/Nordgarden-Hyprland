@@ -1,0 +1,9 @@
+#!/bin/bash
+# Cycle display rotation for the active monitor
+# transform: 0=normal, 1=90°CW, 2=180°, 3=90°CCW
+
+monitor=$(hyprctl monitors -j | jq -r '.[0].name')
+current=$(hyprctl monitors -j | jq '.[0].transform')
+next=$(( (current + 1) % 4 ))
+
+hyprctl keyword monitor "$monitor,preferred,auto,1,transform,$next"
