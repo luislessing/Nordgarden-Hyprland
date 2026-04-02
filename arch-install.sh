@@ -287,6 +287,7 @@ cp "$CONFIG_SRC/hypr/bindings/apps.conf"      "$HOME/.config/hypr/bindings/apps.
 
 cp "$CONFIG_SRC/hypr/scripts/terminal-cwd"    "$HOME/.config/hypr/scripts/terminal-cwd"
 cp "$CONFIG_SRC/hypr/scripts/launch-or-focus" "$HOME/.config/hypr/scripts/launch-or-focus"
+cp "$CONFIG_SRC/hypr/scripts/rotate-display"  "$HOME/.config/hypr/scripts/rotate-display"
 chmod +x "$HOME/.config/hypr/scripts/"*
 
 # Kitty, Waybar, Mako, Fish, Fastfetch, Cava
