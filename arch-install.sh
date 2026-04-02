@@ -267,6 +267,20 @@ mkdir -p \
 
 step "Configs installieren"
 
+# Ownership sicherstellen (falls Dateien bei früherem Lauf als root erstellt wurden)
+sudo chown -R "$USER:$USER" \
+    "$HOME/.config/hypr" \
+    "$HOME/.config/kitty" \
+    "$HOME/.config/waybar" \
+    "$HOME/.config/mako" \
+    "$HOME/.config/fish" \
+    "$HOME/.config/fastfetch" \
+    "$HOME/.config/cava" \
+    "$HOME/.config/btop" \
+    "$HOME/.config/nvim" \
+    "$HOME/.local/bin" \
+    2>/dev/null || true
+
 CONFIG_SRC="$REPO_DIR/config"
 
 # Hyprland
